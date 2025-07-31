@@ -4,40 +4,60 @@ using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
-    public static int dayNum;
+    public static int dayNum = 4;
+    public static int currDay = 0;
     public GameObject startDest;
     private Vector3 startPos;
     public static bool nextDay;
     public GameObject player;
-    [SerializeField] GameObject fadeToBlack;
 
     public GameObject package;
-    public GameObject deliveredPackage;
+    public GameObject[] deliveredPackages;
+    public Day[] days;
+
+    public int i = 0;
 
     private void Start()
     {
+        Debug.Log("Day " + currDay + " started");
         startPos = startDest.transform.position;
         nextDay = false;
+        days[i].dayFinished = false;
     }
 
     private void Update()
     {
+        if (days[i].dayFinished == false && currDay == i && i<dayNum)
+        {
+            days[i].CheckIfFinished();
+        }
+        if (days[i].dayFinished == true )
+        {
+            Debug.Log("The day is finished");
+            nextDay = true;
+            currDay++;
+            days[i].dayFinished = false;
+            if(i < 1)
+            {
+                i++;
+            }
+        }
         if (nextDay)
         {
-            fadeToBlack.GetComponent<PlayableDirector>().Play();
-            dayNum++;
-            Debug.Log("Fade to black");
-            Debug.Log("Day "+ dayNum);
+            Day.deliveredPackages = 0;
+            Debug.Log("Day " + currDay +" started");
             player.transform.position = startPos;
             InitializeObjects();
-            Debug.Log("placed player at start location");
             nextDay = false;
         }
     }
 
     private void InitializeObjects()
     {
-        deliveredPackage.SetActive(false);
+        for (int j = 0; j < deliveredPackages.Length; j++)
+        {
+            deliveredPackages[j].gameObject.SetActive(false);
+        }
         package.SetActive(true);
     }
 }

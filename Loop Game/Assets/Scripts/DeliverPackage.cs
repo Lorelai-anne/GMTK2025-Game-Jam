@@ -6,29 +6,29 @@ public class DeliverPackage : MonoBehaviour
     public GameObject player;
     public GameObject package;
     public GameObject deliveredPackage;
+    private bool hasPlayerEntered;
     private void Start()
     {
         deliveredPackage.SetActive(false);
         package.SetActive(true);
+        //hasPlayerEntered = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Arrived at npc");
         if (collision.gameObject.CompareTag("Player"))
         {
             deliveredPackage.SetActive(true);
             package.SetActive(false);
             Debug.Log("Package was delivered");
-            StartCoroutine(ChangeDay(2f));
+            Delivered();
+            Day.deliveredPackages++;
+            //hasPlayerEntered = true;
         }
     }
 
-    IEnumerator ChangeDay(float delayTime)
+    public static bool Delivered()
     {
-        Debug.Log("Waiting " + delayTime + " seconds");
-        yield return new WaitForSeconds(delayTime);
-        Debug.Log("Performing day change");
-        GameManager.nextDay = true;
+        return true;
     }
 }
