@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Day2
   m_EditorClassIdentifier: 
   dayNum: 1
-  packagesToBeDelivered: 3
+  packagesToBeDelivered: 4
