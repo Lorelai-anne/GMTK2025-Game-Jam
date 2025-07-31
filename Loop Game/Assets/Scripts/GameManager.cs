@@ -15,10 +15,14 @@ public class GameManager : MonoBehaviour
     public GameObject[] deliveredPackages;
     public Day[] days;
 
-    public int i = 0;
+    public GameObject day1;
+    public GameObject day2;
+
+    private int i = 0;
 
     private void Start()
     {
+        InitializeObjects();
         Debug.Log("Day " + currDay + " started");
         startPos = startDest.transform.position;
         nextDay = false;
@@ -54,6 +58,16 @@ public class GameManager : MonoBehaviour
 
     private void InitializeObjects()
     {
+        if(currDay == 0)
+        {
+            day1.SetActive(true);
+            day2.SetActive(false);
+        }
+        if(currDay == 1)
+        {
+            day1.SetActive(false);
+            day2.SetActive(true);
+        }
         for (int j = 0; j < deliveredPackages.Length; j++)
         {
             deliveredPackages[j].gameObject.SetActive(false);

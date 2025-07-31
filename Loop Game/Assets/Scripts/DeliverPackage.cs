@@ -11,19 +11,19 @@ public class DeliverPackage : MonoBehaviour
     {
         deliveredPackage.SetActive(false);
         package.SetActive(true);
-        //hasPlayerEntered = false;
+        hasPlayerEntered = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && hasPlayerEntered == false)
         {
             deliveredPackage.SetActive(true);
             package.SetActive(false);
             Debug.Log("Package was delivered");
             Delivered();
             Day.deliveredPackages++;
-            //hasPlayerEntered = true;
+            hasPlayerEntered = true;
         }
     }
 
