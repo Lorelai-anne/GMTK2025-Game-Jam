@@ -8,6 +8,7 @@ public class Day : ScriptableObject
     public int dayNum;
     public static int deliveredPackages;
     public int packagesToBeDelivered;
+    public bool lastDay;
     public bool dayFinished {get; set;}
 
     public void CheckIfFinished()

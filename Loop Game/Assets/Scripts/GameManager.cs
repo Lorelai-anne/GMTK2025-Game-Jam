@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject day1;
     public GameObject day2;
+    public GameObject day3;
 
     private int i = 0;
 
@@ -41,12 +42,12 @@ public class GameManager : MonoBehaviour
             nextDay = true;
             currDay++;
             days[i].dayFinished = false;
-            if(i < 1)
+            if(i < 1 && days[i].lastDay == false)
             {
                 i++;
             }
         }
-        if (nextDay)
+        if (nextDay && days[i].lastDay == false)
         {
             Day.deliveredPackages = 0;
             Debug.Log("Day " + currDay +" started");
@@ -62,11 +63,19 @@ public class GameManager : MonoBehaviour
         {
             day1.SetActive(true);
             day2.SetActive(false);
+            day3.SetActive(false);
         }
         if(currDay == 1)
         {
             day1.SetActive(false);
             day2.SetActive(true);
+            day3.SetActive(false);
+        }
+        if(currDay == 2)
+        {
+            day1.SetActive(false);
+            day2.SetActive(false);
+            day3.SetActive(true);
         }
         for (int j = 0; j < deliveredPackages.Length; j++)
         {
