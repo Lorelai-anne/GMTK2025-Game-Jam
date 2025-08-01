@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: NewDayData
   m_EditorClassIdentifier: 
   dayNum: 0
-  packagesToBeDelivered: 3
+  packagesToBeDelivered: 6
+  lastDay: 0
